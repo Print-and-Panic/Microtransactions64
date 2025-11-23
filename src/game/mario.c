@@ -1,5 +1,6 @@
 #include <PR/ultratypes.h>
 
+#include "game/mictrotransactions.h"
 #include "sm64.h"
 #include "area.h"
 #include "audio/external.h"
@@ -1218,7 +1219,11 @@ void debug_print_speed_action_normal(struct MarioState *m) {
  * Update the button inputs for Mario.
  */
 void update_mario_button_inputs(struct MarioState *m) {
-    if (m->controller->buttonPressed & A_BUTTON) m->input |= INPUT_A_PRESSED;
+    if (m->controller->buttonPressed & A_BUTTON) { 
+        if (can_afford(m, CREDITS_PER_A_PRESS)) {
+            m->input |= INPUT_A_PRESSED;
+        }
+    }
     if (m->controller->buttonDown    & A_BUTTON) m->input |= INPUT_A_DOWN;
 
     // Don't update for these buttons if squished.
@@ -1704,6 +1709,11 @@ void queue_rumble_particles(struct MarioState *m) {
  */
 s32 execute_mario_action(UNUSED struct Object *obj) {
     s32 inLoop = TRUE;
+    // Add microtransactions here
+    // No negative credits
+    if (gMarioState->numCredits < 0) {
+        gMarioState->numCredits = 0;
+    }
 
     // Updates once per frame:
     vec3f_get_dist_and_angle(gMarioState->prevPos, gMarioState->pos, &gMarioState->moveSpeed, &gMarioState->movePitch, &gMarioState->moveYaw);
@@ -1739,6 +1749,16 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
         gMarioState->marioObj->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
         mario_reset_bodystate(gMarioState);
         update_mario_inputs(gMarioState);
+        update_credit_deduction(gMarioState);
+
+        // Deduct credits if moving at speed
+        if ((gMarioState->framesSinceCreditDeduction >= FRAMES_AT_SPEED) && gMarioState->forwardVel > WALK_SPEED) {
+            deduct_credits(gMarioState, 1);
+        } 
+        // If no credits, only walk
+        if (gMarioState->forwardVel > WALK_SPEED && gMarioState->numCredits <= 0) {
+            gMarioState->forwardVel = WALK_SPEED;
+        }
 
 #ifdef PUPPYCAM
         if (!(gPuppyCam.flags & PUPPYCAM_BEHAVIOUR_FREE)) {

@@ -445,6 +445,7 @@ struct MarioState {
     /*0xC4*/ f32 windGravity;
     // Credit System
     /*0xC8*/ s32 numCredits;
+    /*0xCC*/ s16 framesSinceCreditDeduction;
     // -- HackerSM64 MarioState fields begin --
 #ifdef BREATH_METER
              s16 breath;
