@@ -10,6 +10,7 @@
 #include "dialog_ids.h"
 #include "engine/math_util.h"
 #include "engine/surface_collision.h"
+#include "game/mictrotransactions.h"
 #include "game_init.h"
 #include "interaction.h"
 #include "level_update.h"
@@ -1364,6 +1365,11 @@ u32 interact_bounce_top(struct MarioState *m, UNUSED u32 interactType, struct Ob
         queue_rumble_data(5, 80);
 #endif
         attack_object(obj, interaction);
+        if (m->numCredits > 0) {
+            deduct_credits(m, 1);
+        } else {
+            set_mario_action(m, ACT_STANDING_DEATH , 0);
+        }
         bounce_back_from_attack(m, interaction);
 
         if (interaction & INT_HIT_FROM_ABOVE) {
