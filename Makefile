@@ -70,7 +70,7 @@ endif
 DEFINES += NO_ERRNO_H=1 NO_GZIP=1
 
 # ENABLE_L_TO_INSERT_CREDITS - whether to enable the L button to insert credits
-ENABLE_L_TO_INSERT_CREDITS ?= 0
+ENABLE_L_TO_INSERT_CREDITS ?= 1
 DEFINES += ENABLE_L_TO_INSERT_CREDITS=$(ENABLE_L_TO_INSERT_CREDITS)
 
 # VERSION - selects the version of the game to build
