@@ -958,6 +958,21 @@ void update_hud_values(void) {
             }
         }
 
+        if (gHudDisplay.numCredits < gMarioState->numCredits) {
+            if (gGlobalTimer & 1) {
+                u32 coinSound;
+                if (gMarioState->action & (ACT_FLAG_SWIMMING | ACT_FLAG_METAL_WATER)) {
+                    coinSound = SOUND_GENERAL_COIN_WATER;
+                } else {
+                    coinSound = SOUND_GENERAL_COIN;
+                }
+
+                gHudDisplay.numCredits++;
+                play_sound(coinSound, gMarioState->marioObj->header.gfx.cameraToObject);
+            }
+        }
+
+
 #ifdef ENABLE_LIVES
         if (gMarioState->numLives > MAX_NUM_LIVES) {
             gMarioState->numLives = MAX_NUM_LIVES;

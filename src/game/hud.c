@@ -422,6 +422,15 @@ void render_debug_mode(void) {
 #endif
 
 /**
+ * Renders the amount of credits collected.
+ */
+void render_hud_credits(void) {
+    print_text(HUD_CREDITS_X, HUD_TOP_Y, "+"); // 'Coin' glyph
+    print_text((HUD_CREDITS_X + 16), HUD_TOP_Y, "*"); // 'X' glyph
+    print_text_fmt_int((HUD_CREDITS_X + 30), HUD_TOP_Y, "%d", gHudDisplay.numCredits);
+}
+
+/**
  * Renders the amount of coins collected.
  */
 void render_hud_coins(void) {
@@ -587,6 +596,10 @@ void render_hud(void) {
 
         if (hudDisplayFlags & HUD_DISPLAY_FLAG_KEYS) {
             render_hud_keys();
+        }
+
+        if (hudDisplayFlags & HUD_DISPLAY_FLAG_CREDITS) {
+            render_hud_credits();
         }
 
 #ifdef BREATH_METER
