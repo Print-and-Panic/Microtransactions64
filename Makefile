@@ -208,7 +208,7 @@ endif
 # UNF - whether to use UNFLoader flashcart library
 #   1 - includes code in ROM
 #   0 - does not
-UNF ?= 0
+UNF ?= 1
 $(eval $(call validate-option,UNF,0 1))
 
 # if `unf` is a target, make sure that UNF is set

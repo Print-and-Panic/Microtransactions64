@@ -1,3 +1,33 @@
+# Microtransactions64 💸
+> **"It's-a me, Monopoly!"**
+
+Microtransactions64 is a fork of the **Super Mario 64 Decompilation** that introduces real-world financial consequences to the Mushroom Kingdom.
+
+## 🚨 How it Works
+This project connects your Nintendo 64 to a physical Coin Acceptor via the Everdrive USB port (FTDI Serial).
+* **0 Credits:** Mario cannot jump.
+* **1 Credit ($0.25):** Grants 50 jumps.
+* **Bankruptcy:** If you run out of credits mid-air, physics is disabled.
+
+## 🛠️ Hardware Requirements
+* N64 Console + Everdrive X7 (or similar with USB/FTDI support).
+* Coin Acceptor (DG600F or similar).
+* PC running the **[Microtransactions64-server](link_to_other_repo)** bridge.
+
+---
+
+## 🏗️ Build Instructions (The Extra Stuff)
+Unlike other USB mods, this version uses a lightweight, native Serial implementation. You do **not** need `unfloader` or complex host-side debugging tools to compile.
+
+**To compile, simply use the standard N64 decomp toolchain:**
+1.  Follow the standard installation below (gcc-mips, etc.).
+2.  Run `make VERSION=us` to build the ROM.
+3.  The USB Serial logic is enabled by default in this fork.
+
+---
+<details>
+<summary>⬇️ Click to expand original SM64 Decompilation README (Build Tools, Credits, etc.) ⬇️</summary>
+
 # ![](https://i.imgur.com/CeOukzk.gif) HackerSM64 ![](https://i.imgur.com/s0LUbTo.gif)
 
 **AFTER CLONING THE REPO, CHECK OUT THE `include/config` FOLDER BEFORE ANYTHING ELSE! THERE'S A LOT OF STUFF IN THIS REPO THAT CAN BE TOGGLED THERE.**
@@ -211,3 +241,4 @@ A: Theoretically, all yes.
 ## Installation help
 
 Go read the original SM64 repo README.md
+</details>
