@@ -970,6 +970,18 @@ void update_hud_values(void) {
                 gHudDisplay.numCredits++;
                 play_sound(coinSound, gMarioState->marioObj->header.gfx.cameraToObject);
             }
+        } else if (gHudDisplay.numCredits > gMarioState->numCredits) {
+            if (gGlobalTimer & 1) {
+                u32 coinSound;
+                if (gMarioState->action & (ACT_FLAG_SWIMMING | ACT_FLAG_METAL_WATER)) {
+                    coinSound = SOUND_GENERAL_COIN_WATER;
+                } else {
+                    coinSound = SOUND_GENERAL_COIN;
+                }
+
+                gHudDisplay.numCredits--;
+                play_sound(coinSound, gMarioState->marioObj->header.gfx.cameraToObject);
+            }
         }
 
 
