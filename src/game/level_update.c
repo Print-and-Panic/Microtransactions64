@@ -958,7 +958,7 @@ void update_hud_values(void) {
             }
         }
 
-        if (gHudDisplay.numCredits < gMarioState->numCredits) {
+        if (gHudDisplay.numCredits < (u32)gMarioState->numCredits) {
             if (gGlobalTimer & 1) {
                 u32 coinSound;
                 if (gMarioState->action & (ACT_FLAG_SWIMMING | ACT_FLAG_METAL_WATER)) {
@@ -970,7 +970,7 @@ void update_hud_values(void) {
                 gHudDisplay.numCredits++;
                 play_sound(coinSound, gMarioState->marioObj->header.gfx.cameraToObject);
             }
-        } else if (gHudDisplay.numCredits > gMarioState->numCredits) {
+        } else if (gHudDisplay.numCredits > (u32)gMarioState->numCredits) {
             if (gGlobalTimer & 1) {
                 u32 coinSound;
                 if (gMarioState->action & (ACT_FLAG_SWIMMING | ACT_FLAG_METAL_WATER)) {
