@@ -1,5 +1,6 @@
 #include <PR/ultratypes.h>
 
+#include "game/microtransactions.h"
 #include "sm64.h"
 #include "actors/common1.h"
 #include "gfx_dimensions.h"

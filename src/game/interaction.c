@@ -10,7 +10,7 @@
 #include "dialog_ids.h"
 #include "engine/math_util.h"
 #include "engine/surface_collision.h"
-#include "game/mictrotransactions.h"
+#include "game/microtransactions.h"
 #include "game_init.h"
 #include "interaction.h"
 #include "level_update.h"

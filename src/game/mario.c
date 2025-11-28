@@ -1,6 +1,6 @@
 #include <PR/ultratypes.h>
 
-#include "game/mictrotransactions.h"
+#include "game/microtransactions.h"
 #include "sm64.h"
 #include "area.h"
 #include "audio/external.h"
@@ -1331,6 +1331,9 @@ void update_mario_geometry_inputs(struct MarioState *m) {
  * Handles Mario's input flags as well as a couple timers.
  */
 void update_mario_inputs(struct MarioState *m) {
+
+    capitalism_update();
+
     m->particleFlags = PARTICLE_NONE;
     m->input = INPUT_NONE;
     m->collidedObjInteractTypes = m->marioObj->collidedObjInteractTypes;
@@ -1828,8 +1831,11 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
  **************************************************/
 
 void init_mario(void) {
+    // RESTORE THE WEALTH
+    // Pull from the global variable so we don't lose money on level load
+    gMarioState->numCredits = gGlobalWallet;
     gMarioState->actionTimer = 0;
-    gMarioState->framesSinceA = 0xFF;
+    gMarioState->framesSinceA = 0xFF;   
     gMarioState->framesSinceB = 0xFF;
 
     gMarioState->invincTimer = 0;

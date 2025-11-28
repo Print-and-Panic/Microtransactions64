@@ -4,6 +4,7 @@
 #include <PR/os_vi.h>
 #include <stdio.h>
 
+#include "PR/os_message.h"
 #include "sm64.h"
 #include "audio/external.h"
 #include "game/game_init.h"
@@ -22,6 +23,7 @@
 #include "game/puppyprint.h"
 #include "game/profiling.h"
 #include "game/emutest.h"
+#include "game/microtransactions.h"
 
 // Message IDs
 enum MessageIDs {
@@ -355,7 +357,7 @@ void thread3_main(UNUSED void *arg) {
 #endif
 
 #ifdef UNF
-    debug_initialize();
+    capitalism_init();
 #endif
 
 #ifdef DEBUG
